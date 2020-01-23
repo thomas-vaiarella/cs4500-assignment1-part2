@@ -5,6 +5,7 @@
 #include <vector>
  
  
+//main function
 int main(int argc, char** argv) {
     int flag; // stores current flag from getopt()
     const char* fileName = NULL; // empty string is default if -f flag is missing
