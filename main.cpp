@@ -109,17 +109,16 @@ int main(int argc, char** argv) {
     const char* fileName = NULL; // empty string is default if -f flag is missing
     int fArgExists = 0; // track -f flag count to prevent repeats
     int fromArgExists = 0;
-    int fromArg;
+    size_t fromArg;
     int lenArgExists = 0;
-    int lenArg;
+    size_t lenArg;
     int commandArgExists = 0; // track number of arguments for commands to print
     
     std::string currArg;
     
-    for (int i=0; i < argc; i++) {
+    for (int i=1; i < argc; i++) {
         currArg.clear();
-        std::string s(argv[i]);
-        currArg = s;
+        currArg = std::string(argv[i]);
         
         if (currArg == "-f") {
             if (fArgExists != 0) {
@@ -133,7 +132,8 @@ int main(int argc, char** argv) {
                 std::cout << "Filename = " << fileName << "\n";
             }
         }
-        else if (currArg == "-from") {
+        
+        else if (currArg == std::string("-from")) {
             if (fromArgExists != 0) {
                     printf("Error: 'from' argument cannot repeat\n");
                     exit(1);
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
                     std::cout << "From = " << fromArg << "\n";
                 }
         }
-        else if (currArg == "-len") {
+        else if (currArg == std::string("-len")) {
             if (lenArgExists != 0) {
                     printf("Error: 'len' argument cannot repeat\n");
                     exit(1);
