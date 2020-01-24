@@ -11,7 +11,7 @@ void FAIL() {
     printf("tests failed (expected since nothing is implemented)");
     exit(1);
 }
-void OK(const char* m) { printf(m) }
+void OK(const char* m) { printf(m); }
 void t_true(bool p) { if (!p) FAIL(); }
 void t_false(bool p) { if (p) FAIL(); }
 
