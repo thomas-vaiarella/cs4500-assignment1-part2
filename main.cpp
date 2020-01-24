@@ -7,16 +7,52 @@
 #include <string.h>
 #include <string>
 #include "column.h"
+#include <ctype.h>
+#include <sstream>
 
-bool isString(std::string) {
-    // if (isAlpha(tmpTable[c].at(r).at(i))) {
-    //     colType = STRING;
-    //     foundType = True;
-    //     break;
-    // }
+// need to trim all strings in tmpTable
+
+enum Type {BOOL, INTEGER, FLOAT, STRING};
+
+bool isCertainlyString(std::string str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        if (isalpha(str.at(i)) || str.at(i) == '\"') {
+            return true;
+        }
+    }
+    return false;
 }
 
+bool possiblyFloat(std::string str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        if (str.at(i) == '.') {
+            return true;
+        }
+    }
+    return false;
+}
+
+// fix?
+bool possiblyInt(std::string str) {
+    // std::cout << str << "\n";
+    int maybeInt = std::stoi(str);
+    if (maybeInt != 0 && maybeInt != 1) {
+        return true;
+    }
+    return false;
+}
+
+// void createColumn(Type colType, std::vector<std::string>* tmpCol, size_t c, Column* table) {
+//     if (colType == STRING) {
+//         table[c] = new StringColumn(tmpCol->size());
+//         for (size_t i = table[c].size; i >= 0; i--) {
+//             table[c][i] = tmpCol[i];
+//         }
+//     }
+// }
+
 int main(int argc, char** argv) {
+
     int flag; // stores current flag from getopt()
     const char* fileName = NULL; // empty string is default if -f flag is missing
     int stringArgExists = 0; // track -f flag count to prevent repeats
@@ -166,19 +202,24 @@ int main(int argc, char** argv) {
             // foundStartIndex = false;
     }
 
-    enum Type {BOOL, INTEGER, FLOAT, STRING}
     Type colType = BOOL;
-    Column table[maxFields];
+    Column* table[maxFields];
     bool foundType = false;
+    Type colTypes[maxFields];
 
     for (size_t c = 0; c < maxFields; c++) {
         if (foundType) {
-            createColumn(colType, pointerToColumn);
+            colTypes[c] = colType;
+            // createColumn(colType, &tmpTable[c], c);
             continue;
         }
         for (size_t r = 0; r < tmpTable[c].size(); r++) {
-            std::String* currStr = &tmpTable[c].at(r);
-            if (isCertainlyString(currStr) {
+            std::string currStr = tmpTable[c].at(r);
+            if (currStr == "") {
+                continue;
+            }
+            std::cout << currStr << "\n";
+            if (isCertainlyString(currStr)) {
                 colType = STRING;
                 foundType = true;
                 break;
@@ -186,14 +227,20 @@ int main(int argc, char** argv) {
             else if (possiblyFloat(currStr)) {
                 colType = FLOAT;
             }
-            else if (possiblyInt(currStr)) {
+            else if (possiblyInt(currStr) && colType != FLOAT) {
                 colType = INTEGER;
             }
         }
-        createColumn(colType, pointerToColumn);
+        // createColumn(colType, &tmpTable[c], c);
+        colTypes[c] = colType; 
         foundType = false;
     }
 
+    // for (size_t i = 0; i < maxFields; i++) {
+    //     std::cout << colTypes[i] << " ";
+    // }
+
+    // std::cout << colTypes[0] << "\n";
     // for (size_t i = 0; i < tmpTable[6].size(); i++) {
     //     std::cout << tmpTable[6].at(i) << "\n";
     // }
