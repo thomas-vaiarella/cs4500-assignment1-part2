@@ -1,5 +1,5 @@
 # CS4500 Assignment 1, part 2
-## Authors: Nishanth Duraiarasu and Ryan Harrigan
+### Authors: Nishanth Duraiarasu and Ryan Harrigan
 
 Software Development (Vesely's section, TF 1:35-3:15pm)
 
