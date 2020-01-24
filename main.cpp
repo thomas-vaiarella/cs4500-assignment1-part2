@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
             }
         }
         
-        else if (currArg == std::string("-from")) {
+        else if (currArg == "-from") {
             if (fromArgExists != 0) {
                     printf("Error: 'from' argument cannot repeat\n");
                     exit(1);
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
                     std::cout << "From = " << fromArg << "\n";
                 }
         }
-        else if (currArg == std::string("-len")) {
+        else if (currArg == "-len") {
             if (lenArgExists != 0) {
                     printf("Error: 'len' argument cannot repeat\n");
                     exit(1);
