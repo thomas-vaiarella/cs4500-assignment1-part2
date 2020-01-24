@@ -1,7 +1,10 @@
+// lang: C++;
+
 // #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <getopt.h>
 #include <vector>
 #include <iostream>
 #include <string.h>
@@ -102,30 +105,107 @@ bool possiblyInt(std::string str) {
 //     }
 
 int main(int argc, char** argv) {
-
-    int flag; // stores current flag from getopt()
-    const char* fileName = NULL; // empty string is default if -f flag is missing
-    int stringArgExists = 0; // track -f flag count to prevent repeats
     
-    while ((flag = getopt(argc, argv, "+f:")) != -1) {
-        switch (flag) {
-            case 'f':
-                if (stringArgExists != 0) {
-                    printf("Error: Flags cannot repeat\n");
+    const char* fileName = NULL; // empty string is default if -f flag is missing
+    int fArgExists = 0; // track -f flag count to prevent repeats
+    int fromArgExists = 0;
+    int fromArg;
+    int lenArgExists = 0;
+    int lenArg;
+    int commandArgExists = 0; // track number of arguments for commands to print
+    
+    std::string currArg;
+    
+    for (int i=0; i < argc; i++) {
+        currArg.clear();
+        std::string s(argv[i]);
+        currArg = s;
+        
+        if (currArg == "-f") {
+            if (fArgExists != 0) {
+                printf("Error: Flags cannot repeat\n");
+                exit(1);
+            }
+            fArgExists++;
+            if (i++ < argc) {
+                std::string file(argv[i++]);
+                fileName = file.c_str();
+                std::cout << "Filename = " << fileName << "\n";
+            }
+        }
+        else if (currArg == "-from") {
+            if (fromArgExists != 0) {
+                    printf("Error: 'from' argument cannot repeat\n");
                     exit(1);
                 }
-                stringArgExists++;
-                fileName = optarg; //optarg created by getopt()
-                break;
-            case '?':
-                if (opterr != 0) {
-                    exit(1);
+                fromArgExists++;
+                if (i++ < argc) {
+                    fromArg = std::atoi(argv[i++]);
+                    std::cout << "From = " << fromArg << "\n";
                 }
-                break;
-            default:
-                break;
+        }
+        else if (currArg == "-len") {
+            if (lenArgExists != 0) {
+                    printf("Error: 'len' argument cannot repeat\n");
+                    exit(1);
+            }
+            lenArgExists++;
+            if (i++ < argc) {
+                lenArg = std::atoi(argv[i++]);
+                std::cout << "Length = " << lenArg << "\n";
+            }
+        }
+        else if (currArg == "-print_col_type") {
+            if (commandArgExists != 0) {
+                    printf("Error: cannot have more than one command to print\n");
+                    exit(1);
+            }
+            lenArgExists++;
+            if (i++ < argc) {
+                //fill in 1 variable here
+            }
+        }
+        else if (currArg == "-print_col_idx") {
+            if (commandArgExists != 0) {
+                    printf("Error: cannot have more than one command to print\n");
+                    exit(1);
+            }
+            lenArgExists++;
+            if (i++ < argc && i+2 < argc) {
+                //fill in 2 other variables here
+            }
+        }
+        else if (currArg == "-is_missing_idx") {
+            if (commandArgExists != 0) {
+                    printf("Error: cannot have more than one command to print\n");
+                    exit(1);
+            }
+            lenArgExists++;
+            if (i++ < argc && i+2 < argc) {
+                //fill in 2 other variables here
+            }
         }
     }
+    
+//    while ((flag = getopt(argc, argv, "+f:")) != -1) {
+//        switch (flag) {
+//            case 'f':
+//                if (stringArgExists != 0) {
+//                    printf("Error: Flags cannot repeat\n");
+//                    exit(1);
+//                }
+//                stringArgExists++;
+//                fileName = optarg; //optarg created by getopt()
+//                break;
+//            case '?':
+//                if (opterr != 0) {
+//                    exit(1);
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
  
     if (!fileName) {
         printf("Error: Missing filename argument\n");
