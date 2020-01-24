@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <vector>
-<<<<<<< HEAD
 #include <iostream>
 #include <string.h>
 #include <string>
@@ -17,11 +16,6 @@ bool isString(std::string) {
     // }
 }
 
-=======
- 
- 
-//main function
->>>>>>> 4a10810e64c15935346fea619fedd4a4e60439f1
 int main(int argc, char** argv) {
     int flag; // stores current flag from getopt()
     const char* fileName = NULL; // empty string is default if -f flag is missing
