@@ -221,12 +221,32 @@ int main(int argc, char** argv) {
     fseek(file, 0L, SEEK_END);
     size_t fileSize = ftell(file);
     rewind(file);
+
+    startOfFile = fromArg;
+    if (startOfFile != 0) {
+        for (size_t i = fromArg; i < fileSize; i++) {
+            if (fileContents[i] == '\n') {
+                startOfFile = i + 1;
+                break;
+            }
+        }
+    }
+
+    endOfFile = lenArg
+    if (endOfFile != fileSize) {
+        for (size_t i = lenArg; i >= startOfFile; i--) {
+            if (fileContents[i] == '\n') {
+                endOfFile = i;
+                break;
+            }
+        }
+    }
  
     // create char array of file contents
     char* fileContents = new char[fileSize];
     fread(fileContents, 1, fileSize, file);
     fclose(file);
- 
+
  
     bool foundStartIndex = false; // has the first index of possible word been seen?
     size_t startIndex = 0; // first index of possible word
@@ -234,8 +254,8 @@ int main(int argc, char** argv) {
     size_t maxFields = 0;
     size_t numFields = 0;
 
-    for (size_t i = 0; i < fileSize; i++) {
-        if (fileContents[i] == '\n' || i == fileSize - 1) {
+    for (size_t i = startOfFile; i < endOfFile; i++) {
+        if (fileContents[i] == '\n' || i == endOfFile - 1) {
             if (fileContents[i] == '>') {
                 numFields++;
             }
@@ -257,8 +277,10 @@ int main(int argc, char** argv) {
     std::vector<std::string> tmpTable[maxFields];
     size_t currCol = 0;
 
+
+
     // parse through file by character
-    for (size_t i = 0; i < fileSize; i++) {        
+    for (size_t i = startOfFile; i < endOfFile; i++) {        
         if (!foundStartIndex && fileContents[i] == '<') {
             foundStartIndex = true;
             startIndex = i + 1;
@@ -272,7 +294,7 @@ int main(int argc, char** argv) {
             else {
                 // create String from file contents array
                 char* newStr = new char[strLen + 1];
-                strncpy(newStr, fileContents+startIndex, strLen);
+                strncpy(newStr, fileContents+startOfFile+startIndex, strLen);
                 newStr[strLen + 1] = 0;
                 tmpTable[currCol].push_back(std::string(newStr));
             }
@@ -287,6 +309,12 @@ int main(int argc, char** argv) {
             currCol = 0;
         }
 
+        for (size_t r = 0; r < tmpTable[0].size(); r++) {
+            for (size_t c = 0; c < maxFields; c++) {
+                std::cout << tmpTable[r].at(c) << " "; 
+            }
+            std::cout << "\n";
+        }
 
             // // increase capacity of char* for final word by 1
             // if (i == fileSize - 1) {
