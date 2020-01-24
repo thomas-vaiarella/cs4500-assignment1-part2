@@ -1,3 +1,5 @@
+//lang::Cpp
+
 #pragma once
 #include <stdlib.h>
 #include "object.h"
