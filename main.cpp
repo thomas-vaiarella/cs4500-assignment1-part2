@@ -51,6 +51,56 @@ bool possiblyInt(std::string str) {
 //     }
 // }
 
+// int flag; // stores current flag from getopt()
+//     unsigned long intArg = 0; // 0 is default if -i flag is missing
+//     // using const to prevent string literal to char* compiler warning
+//     const char* stringArg = ""; // empty string is default if -f flag is missing
+//     const char* optionalArg = ""; // empty string is default if optional arg is missing
+//     int intArgExists = 0; // track -i flag count to prevent repeats
+//     int stringArgExists = 0; // track -f flag count to prevent repeats
+    
+//     while ((flag = getopt(argc, argv, "+i:f:")) != -1) {
+//         switch (flag) {
+//             case 'i':
+//                 if (intArgExists != 0) {    
+//                     printf("Error: Flags cannot repeat\n");
+//                     exit(1);
+//                 }
+//                 intArgExists++;
+//                 if (strlen(optarg) > 1 && optarg[0] == '0') {
+//                     printf("Error: Flag i does not accept leading 0's\n");
+//                     exit(1);
+//                 }
+//                 // using strtoul instead of atoi to support larger positive integers
+//                 char* endptr;
+//                 intArg = strtoul(optarg, &endptr, 10);
+//                 // checking if input contains only numeric characters
+//                 // also prevents negative integers as '-' is non-numeric
+//                 for (unsigned long int i = 0; i < strlen(optarg); i++) {
+//                     if (isdigit(optarg[i]) == 0) {
+//                         printf("Error: Flag i does not accept non-numeric characters\n");
+//                         exit(1);
+//                     }
+//                 }
+//                 break;
+//             case 'f':
+//                 if (stringArgExists != 0) {
+//                     printf("Error: Flags cannot repeat\n");
+//                     exit(1);
+//                 }
+//                 stringArgExists++;
+//                 stringArg = optarg;
+//                 break;
+//             case '?':
+//                 if (opterr != 0) {
+//                     exit(1);
+//                 }
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+
 int main(int argc, char** argv) {
 
     int flag; // stores current flag from getopt()
@@ -236,9 +286,9 @@ int main(int argc, char** argv) {
         foundType = false;
     }
 
-    // for (size_t i = 0; i < maxFields; i++) {
-    //     std::cout << colTypes[i] << " ";
-    // }
+    for (size_t i = 0; i < maxFields; i++) {
+        std::cout << colTypes[i] << " ";
+    }
 
     // std::cout << colTypes[0] << "\n";
     // for (size_t i = 0; i < tmpTable[6].size(); i++) {
