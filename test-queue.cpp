@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     queue1.add(str1); //add str1 to queue1
     t_true(queue1->size() == 2); //2 items (a, str1)
     t_true(queue1->head()->equals(a)); //a is head of queue1
-    t_true(queue1->remove()->equals(a)); //removes the head from queue1 (a)
+    queue1->remove(); //removes the head from queue1 (a)
     t_true(queue1->size() == 1); //1 item (str1)
     t_false(queue1->head()->equals(a)); //a is no longer the head
     t_true(queue1->head()->equals(str1)); //str1 is head of queue1
