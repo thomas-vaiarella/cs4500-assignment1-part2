@@ -10,7 +10,7 @@ class Queue : public Object {
     public:
         size_t size_; // stores size of queue
 
-        virtual Queue() : Object() {}
+        Queue() : Object() {}
 
         virtual ~Queue() {}
 
@@ -50,4 +50,4 @@ class Queue : public Object {
          * Overrides hashCode() from Object 
         */
         size_t hashCode() {}
-}
+};
