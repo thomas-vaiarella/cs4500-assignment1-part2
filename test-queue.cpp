@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     
     t_true(str1->concat(str2)->equals(str4)); //str2 added to str1 equals str4
     
-    t_true(strcmp(str4->strCopy(),str4->str))
+    t_true(strcmp(str4->strCopy(),str4->str));
     
     Queue* queue1 = new Queue();
     t_true(queue1->size() == 0); //nothing in queue1
