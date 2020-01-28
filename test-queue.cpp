@@ -4,6 +4,7 @@
 #include "object.h"
 #include "queue.h"
 #include "string.h"
+#include <stdio.h>
 
 // Using test functions from warmup 3
 void FAIL() {
