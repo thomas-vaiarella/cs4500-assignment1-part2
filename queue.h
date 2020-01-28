@@ -50,4 +50,4 @@ class Queue : public Object {
          * Overrides hashCode() from Object 
         */
         size_t hashCode() {}
-}
+};
