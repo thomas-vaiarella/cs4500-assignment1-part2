@@ -69,5 +69,13 @@ int main(int argc, char** argv) {
     t_true(queue1->equals(queue2)); //queues are now equal
     t_true(queue1->hashCode() == queue2->hashCode()); //equal hash codes
     
+    delete a;
+    delete str1;
+    delete str2;
+    delete str3;
+    delete str4;
+    delete queue1;
+    delete queue2;
+    
     OK("All tests passed!");
 }
