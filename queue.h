@@ -24,7 +24,7 @@ class Queue : public Object {
         /*
          * Removes and returns copy of object at the head of the queue
         */
-        virtual Object* remove() {}
+        virtual void remove() {}
 
         /*
          * Returns pointer to object at the head of the queue
