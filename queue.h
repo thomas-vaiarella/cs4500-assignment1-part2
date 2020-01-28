@@ -10,7 +10,7 @@ class Queue : public Object {
     public:
         size_t size_; // stores size of queue
 
-        virtual Queue() : Object() {}
+        Queue() : Object() {}
 
         virtual ~Queue() {}
 
@@ -39,7 +39,7 @@ class Queue : public Object {
 
         /**
 		 * Is this Queue equal to the given Object?
-         * Equality based on caling equals() on each queue element
+         * Equality based on calling equals() on each queue element
          * Overrides equals() from Object
 		 * @param otherQ Object pointer
 		*/
