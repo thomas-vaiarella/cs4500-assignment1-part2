@@ -8,7 +8,6 @@
 */
 class Queue : public Object {
     public:
-        size_t size_; // stores size of queue
 
         Queue() : Object() {}
 
@@ -22,7 +21,7 @@ class Queue : public Object {
         virtual void add(Object* o) {}
 
         /*
-         * Removes and returns copy of object at the head of the queue
+         * Removes the object at the head of the queue
         */
         virtual void remove() {}
 
