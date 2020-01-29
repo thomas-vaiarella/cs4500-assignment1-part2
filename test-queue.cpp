@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     
     t_true(str1->concat(str2)->equals(str4)); //str2 added to str1 equals str4
     
-    t_true(strcmp(str4->strCopy(),str4));
+    t_true(strcmp(str4->strCopy(),str4->str));
     
     Queue* queue1 = new Queue();
     t_true(queue1->size() == 0); //nothing in queue1
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     queue1->add(str1); //add str1 to queue1
     t_true(queue1->size() == 2); //2 items (a, str1)
     t_true(queue1->head()->equals(a)); //a is head of queue1
-    t_true(queue1->remove()->equals(a)); //removes the head from queue1 (a)
+    queue1->remove(); //removes the head from queue1 (a)
     t_true(queue1->size() == 1); //1 item (str1)
     t_false(queue1->head()->equals(a)); //a is no longer the head
     t_true(queue1->head()->equals(str1)); //str1 is head of queue1
@@ -68,6 +68,14 @@ int main(int argc, char** argv) {
     queue2->add(str1); //adds str1 to queue2
     t_true(queue1->equals(queue2)); //queues are now equal
     t_true(queue1->hashCode() == queue2->hashCode()); //equal hash codes
+    
+    delete a;
+    delete str1;
+    delete str2;
+    delete str3;
+    delete str4;
+    delete queue1;
+    delete queue2;
     
     OK("All tests passed!");
 }

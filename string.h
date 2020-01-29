@@ -8,23 +8,20 @@
 */
 class String : public Object {
     public:
-        size_t size_; // stores size of String not including null terminator
-        const char* str; // stores each char of String
-
         // input cannot be null
-        virtual String(const char* strInput) {}
+        String(const char* strInput) {}
 
         virtual ~String() {}
 
         /**
-            * Returns this String appended by otherStr
-            * Returned String must be deleted by caller
-            * @param other String pointer
+    	 * Returns this String appended by otherStr
+    	 * Returned String must be deleted by caller
+         * @param other String pointer
         */
         String* concat(String *other) {}
 
         /**
-		 * Returns the size of this String
+	 * Returns the size of this String
          */
         size_t size() {}
 
@@ -37,26 +34,27 @@ class String : public Object {
         virtual int compare(String *other) {}
 
         /**
-		 * Returns the size of this String not including null terminator
+	 * Returns the size of this String not including null terminator
+	 * Should return size in constant time
         */
         size_t size() {}
 
         /**
-		 * Is this String equal to the given Object?
+	 * Is this String equal to the given Object?
          * Equality based on char values of each String
          * Overrides equals() from Object
-		 * @param otherStr Object pointer
-		*/
+	 * @param otherStr Object pointer
+	*/
         bool equals(Object *otherStr) {}
 
         /**
-		 * Returns the hash code for this String
+	 * Returns the hash code for this String
          * Uses hash code algorithm for Java Strings
          * Overrides hashCode() from Object 
         */
         size_t hashCode() {}
 
         /**
-		 * Returns copy of char* representation of this String
+	 * Returns copy of char* representation of this String
         */
         char* strCopy() {}

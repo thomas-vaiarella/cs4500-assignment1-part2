@@ -24,7 +24,7 @@ class Queue : public Object {
         /*
          * Removes and returns copy of object at the head of the queue
         */
-        virtual Object* remove() {}
+        virtual void remove() {}
 
         /*
          * Returns pointer to object at the head of the queue
@@ -39,7 +39,7 @@ class Queue : public Object {
 
         /**
 		 * Is this Queue equal to the given Object?
-         * Equality based on caling equals() on each queue element
+         * Equality based on calling equals() on each queue element
          * Overrides equals() from Object
 		 * @param otherQ Object pointer
 		*/
