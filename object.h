@@ -17,11 +17,13 @@ class Object {
          * True if other points to this object
          * @param other Object to compare against
         */
-        virtual bool equals(Object* other) {}
+        virtual bool equals(Object* other) {
+            return reinterpret_cast<int>(this) == reinterpret_cast<int>(other);
+        }
 
         /*
          * Returns a hashcode for this object
          * hashCode will be this Object's address
         */
         virtual size_t hashCode() {}
-}
+};

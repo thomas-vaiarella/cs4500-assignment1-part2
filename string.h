@@ -2,14 +2,18 @@
 
 #pragma once
 #include <stdlib.h>
+#include <string.h>
 
 /*
  * String - Represents a C-style string 
 */
 class String : public Object {
     public:
+        char* data;
         // input cannot be null
-        String(const char* strInput) {}
+        String(const char* strInput) {
+            this->data = strdup(strInput);
+        }
 
         virtual ~String() {}
 
@@ -58,3 +62,4 @@ class String : public Object {
 	 * Returns copy of char* representation of this String
         */
         char* strCopy() {}
+};
