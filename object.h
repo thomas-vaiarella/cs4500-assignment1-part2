@@ -1,29 +1,35 @@
 //lang::CwC
-
 #pragma once
-#include <stdlib.h>
 
-/*
- * Object - Base class for all other classes
-*/
+#include <cstdlib>
+
+/**
+ * A class that represents the top of the object hierarchy.
+ * author: chasebish */
 class Object {
     public:
-        size_t hash; // stores hashCode from last call to hashCode()
-    
-    virtual Object() {}
+    /** CONSTRUCTORS & DESTRUCTORS **/
 
-    virtual ~Object() {}
+    /* Default Object constructor */
+    Object() {
 
-    /*
-     * Is this object equal to the other object?
-     * True if other points to this object
-     * @param other Object to compare against
-    */
-    virtual bool equals(Object* other) {}
+    }
 
-    /*
-     * Returns a hashcode for this object
-     * hashCode will be this Object's address
-    */
-    virtual size_t hashCode() {}
-}
+    /* Default Object destructor, to be overriden by subclasses */
+    virtual ~Object() {
+
+    }
+
+
+    /** VIRTUAL METHODS **/
+
+    /* Returns whether two objects are equal, to be overriden by subclasses */
+    virtual bool equals(Object* const obj) {
+        return this->hash() == obj->hash() && this == obj;
+    }
+
+    /* Returns an object's hash value. Identical objects should have identical hashes */
+    virtual size_t hash() {
+        return reinterpret_cast<size_t>(this);
+    }
+};
